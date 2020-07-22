@@ -1,0 +1,29 @@
+@function str-index-last($string, $substring) {
+	@for $i from -(str-length($string)) through -1 {
+		$index: abs($i);
+		$char: str-slice($string, $index, $index);
+		@if $char == $substring {
+			@return $index;
+		}
+	}
+	@return null;
+}
+
+@function list-join($list, $separator: ",") {
+	$src: "";
+	$len: length($list);
+	@if $len > 0 {
+		$i: 1;
+		@each $el in $list {
+			$src: #{$src}#{$el}#{if($i == $len, "", $separator)};
+			$i: $i + 1;
+		}
+	}
+	@return $src;
+}
+
+@function str-starts($string, $substring) {
+	$string: $string;
+	$substring: $substring;
+	@return str-slice(1, str-length($substring)) == $substring;
+}

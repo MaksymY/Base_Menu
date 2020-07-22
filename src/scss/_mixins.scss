@@ -1,0 +1,29 @@
+@mixin font-face($path, $filename, $files, $name: null, $weight: normal, $style: normal) {
+	$formats: (
+		eot: "embedded-opentype",
+		woff2: "woff2",
+		woff: "woff",
+		ttf: "truetype",
+		otf: "opentype",
+		svg: "svg"
+	);
+
+	$path: #{$path}#{if(str-index-last($path) == str-length($path), "", "/")};
+
+	$src: ();
+	$i: 1;
+
+	@each $ext, $format in $formats {
+		@if (index($files, $ext)) {
+			$src: append($src, url("#{$path}#{$filename}.#{$ext}#{if($ext == eot, '?ie', '')}") format("#{$format}"));
+			$i: $i + 1;
+		}
+	}
+
+	@font-face {
+		font-family: if($name, $name, $filename);
+		src: list-join($src, ", ");
+		font-weight: $weight;
+		font-style: $style;    
+	}
+}

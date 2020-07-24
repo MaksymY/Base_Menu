@@ -33,5 +33,21 @@ export default {
 </script>
 
 <style lang="scss">
-    
+    .nav {
+		background-color: $nav_base_color;
+		&__links {
+			list-style: none;
+			padding: 0;
+		}
+		&__item {
+			display: inline;
+			& + & {
+				margin-left: 30px;
+			}
+		}
+		&__link {
+			text-decoration:none;
+			color: $nav_font_color;
+		}
+	}
 </style>
